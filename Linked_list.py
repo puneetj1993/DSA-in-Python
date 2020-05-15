@@ -12,7 +12,7 @@
 #------Insertion of a new node-----------
 
 # Add new node to the end of a linked list: We need to traverse the list from Head to Tail and then add new element and set previous tail element ponter to this newly add element
-# and set it pointer to Null. Complexity is O(n) where n=no of elements in the list
+# and set its pointer to Null. Complexity is O(n) where n=no of elements in the list
 # Add new node to the start of a linked list: Add new element and set Head to this element and add pointer to the old head element. Complexity is O(1)
 # Add new element in the middle somewhere b/w Head and Tail: Add new element and set previous pointer to this element and this element's pointer to next element. Complexity is O(N)
 
@@ -128,3 +128,28 @@ node1.add(12)
 node1.remove(50)
 print(node1.size())
 print(node1.search(50))
+#---------------Reverse a Linked List------------------------
+
+class Node: 
+  
+    # Constructor to initialize the node object 
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None
+
+def reverse(head):
+    """
+    type head: LinkedList
+    Reversal of a singly linked list: So here basically we are changng the pointers of a linked list:
+    original: 1-> 2 -> 3 -> 4
+    reversed: Null <- 1 <- 2 <- 3 <- 4 OR 4 -> 3 -> 2 -> 1 -> Null
+    For this, we are saving current.next node in a nex variable and then break 1 -> 2 link to make it Null <- 1 like this.
+    """
+    prev = None
+    current = head 
+    while current: 
+        nex = current.next     #Saving the next element in nex variable
+        current.next = prev    #Making first element of head points to null(Ist ieration) post that 2 -> 1 and so on
+        prev = current         #Making current equal to prev so that current can be pointed to prev in above step
+        current = next         #since now current.next= none(prev,Ist iteration) thats why saved current.next in nex
+    return prev
