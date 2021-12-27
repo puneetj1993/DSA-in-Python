@@ -1,0 +1,68 @@
+"""
+Minimum window substring
+This is the toughest problem. If we are able to resolve this then we can do any sliding window problem
+This is the only problem where we have to find the minimum substring so, it involves optimization after getting the answer
+Input: 
+    - arr main string
+    - patt patern whose all the letters must be present in the main string atleast once(could be more than once). Also, it is not necessary that leters shoud be in order or continous. They have to be present 
+Output:-
+    - int, the length of minimum sub string which suffice the requirement
+"""
+arr = "TOTMTAPTAT"
+patt = "TTA"
+d={}
+min=1000 # To get minimum value
+i=j=0
+
+# Creating a map to count the occurence of unique letters in pattern patt
+for iv in patt:
+    if iv in d:
+        d[iv]+=1
+    else:
+        d[iv]=1
+
+# Counter variable which hold the len of dict. this is being used to prevent the traversing of dict to check whether all the elements are 0 
+cnt=len(d)
+
+while j<len(arr):
+    # If required letter of patt is there, decrease the occurence by 1
+    if arr[j] in d:
+        d[arr[j]]-=1
+        # If occ=0, all the frequency of that particular character is met, reduce the cnt variable
+        if not d[arr[j]]:
+            cnt-=1
+    # if cnt>0, it means still all req letter are not in the substring
+    if cnt>0:
+        j+=1
+        
+    # if cnt=0 it means condition is met
+    # saving the min value
+    elif cnt == 0:
+        if j-i+1<min:
+            min=j-i+1
+        
+        # since it is a min problem, optimizing the substring by moving the start(i) pointer
+        #if any letter in the dict is negative it means we can remove that additional letter to minimize the substring
+        # if letter is not present in dict d then we can simply ignore it and can be remove it from substring to minimize its size
+        while cnt==0:
+            # if any leeter(i) in dict, increase it this will make there occ to 0 which is the requirement
+            # if occ=1, it means we have overrun and our new substring will not met the requirement
+            # Increase the count and store the result as this is optimal if we dont include this ith char then req are not met
+            if arr[i] in d:
+                d[arr[i]]+=1
+                if d[arr[i]]==1:
+                    cnt+=1
+                    #storing the result
+                    if j-i+1<min:
+                        min=j-i+1
+            i+=1
+        j+=1  
+print(min)
+        
+    
+        
+        
+        
+
+    
+    

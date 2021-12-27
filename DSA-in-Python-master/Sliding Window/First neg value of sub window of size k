@@ -1,0 +1,44 @@
+"""
+Problem: First Negative number in window size of K
+Input:
+    - An array arr of size n
+    - Size of subwindow =3
+Output:
+    - A list containing the first negative number of each sub window of size k. if none return 0
+"""
+arr = [12, -1, -7, 8, -15, 30, 16, 28]
+n = len(arr)
+i=j=0
+k=3
+a=[]
+b=[]
+while j<n:
+
+    """
+    Some calculations while sliding the window - if element of array is negative , put it in some list/stack/queue
+    """
+    if arr[j] <0:
+        a.append(arr[j])
+      
+    if j-i+1<k: #Moving j if window size is not reached
+        j=j+1
+        
+    elif j-i+1 == k:
+        """ 
+        Getting answer from the calculations - if list is empty, return 0 otherwise , 
+        first element of list will be first neg value, return it
+        """
+        if a:
+            b.append(a[0])
+        elif not a:
+            b.append(0)
+        
+        """
+        remove ith element and slide the window further - we will be removing the ith element from the list if it exists
+        and then slide the window using j++ and  i++
+        """
+        if arr[i]<0:
+            a.pop(0)
+        i = i + 1
+        j = j + 1
+print(b)

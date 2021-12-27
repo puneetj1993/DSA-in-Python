@@ -1,0 +1,35 @@
+"""
+Problem: Maximum Sum of sub-arrays of 'k' size( A sliding window problem)
+Input:
+    - An array arr of size n
+    - Size of subwindow =3
+Output:
+    - Max Sum of all possible sub-arrays
+"""
+arr = [2,5,1,8,2,9,1]
+n = len(arr)
+i = 0
+j =0 
+k=3
+sum=max=0
+
+while j<n:
+    # Keeping incrementing the j pointer untill we reach 
+    # the window size of k. During this journey, simultaneously add the
+    # jth element of array into sum variable
+    if j-i+1 < k:
+        sum += arr[j]
+        j += 1
+    
+    # Once, sub array of required k size is acheivied
+    # add the jth element to sum and assign this sum to Max only if sum > max
+    # Now, to maintain this window, we just have to increment j and i by 1
+    # and to sum, we have to add arr[j] and minus arr[i-1] until the end of array
+    elif j-i+1 == k:
+        sum += arr[j]
+        if sum > max:
+            max = sum
+        i += 1
+        j += 1
+        sum = sum - arr[i-1]
+print(max)

@@ -1,0 +1,38 @@
+"""
+Variable Window Question
+
+Longest substring with no repeated characters( means all unique characters)
+Input:
+    - A string
+    - No repeated characters(all unique characters)
+Output:
+    - Return the length of largest subarray out of all possible subarrays which contains no repeated sampling points
+"""
+arr = "abcdfabcbeewbe"
+n = len(arr)
+
+i=j=0
+max=0
+d={}
+while j<n:
+    # calculations
+    if arr[j] in d:
+        d[arr[j]] = d[arr[j]] + 1
+    else:
+        d[arr[j]] = 1
+        
+    if len(d)==j-i+1:
+        if j-i+1>max:
+            max=j-i+1
+        j=j+1
+    # condition>given condition
+    # use loop till we get the condition<=gien_condition
+    elif len(d)<j-i+1:
+        while len(d)<j-i+1:
+            d[arr[i]] = d[arr[i]] - 1
+            if d[arr[i]] == 0:
+                del d[arr[i]]
+            i=i+1
+        j=j+1
+print(max)
+

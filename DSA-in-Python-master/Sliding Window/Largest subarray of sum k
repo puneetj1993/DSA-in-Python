@@ -1,0 +1,39 @@
+"""
+Variable Window Question
+
+Largest subarray of sum k
+Input:
+    - An array
+    - Sum(condition) of all subarrays=5
+Output:
+    - Return the length of largest subarray out of all possible subarrays whose sum is 5
+"""
+arr = [4,1,1,1,1,1,2,3,5]
+n = len(arr)
+k=5 # condition 
+
+sum =0
+i=j=0
+max=0
+while j<n:
+    # calculations
+    sum = sum + arr[j]
+    # condition<given condition 
+    if sum < k:
+        j=j+1
+    # condition == given condition
+    # find answer from condition
+    elif sum ==k:
+        if j-i+1>max:
+            max=j-i+1
+        j=j+1
+		i=i+1
+    # condition>given condition
+    # use loop till we get the condition<=gien_condition
+    elif sum>k:
+        while sum>k:
+            sum = sum - arr[i]
+            i=i+1
+        j=j+1
+print(max)
+

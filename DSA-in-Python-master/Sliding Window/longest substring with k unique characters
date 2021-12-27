@@ -1,0 +1,44 @@
+"""
+Variable Window Question
+
+Longest substring with k unique characters
+Input:
+    - A string
+    - Total(condition) unique characters in all subarrays=3
+Output:
+    - Return the length of largest subarray out of all possible subarrays in which total unique characters are 3
+"""
+arr = "aabacbebebe"
+n = len(arr)
+k=3 # condition 
+
+i=j=0
+max=0
+d={}
+while j<n:
+    # calculations
+    if arr[j] in d:
+        d[arr[j]] = d[arr[j]] + 1
+    else:
+        d[arr[j]] = 1
+    # condition<given condition
+    # len of dictionary repreents the total unique characters
+    if len(d) < k:
+        j=j+1
+    # condition == given condition
+    # find answer from condition
+    elif len(d)==k:
+        if j-i+1>max:
+            max=j-i+1
+        j=j+1
+    # condition>given condition
+    # use loop till we get the condition<=gien_condition
+    elif len(d)>k:
+        while len(d)>k:
+            d[arr[i]] = d[arr[i]] - 1
+            if d[arr[i]] == 0:
+                del d[arr[i]]
+            i=i+1
+        j=j+1
+print(max)
+
