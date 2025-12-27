@@ -95,4 +95,26 @@ def solve(arr,op,ip):
     return
 
 solve(arr,op,ip)
+
 print(solution)
+---------------------Another solution using BT via Aditya verma logic
+arr = [5,10,12,13,15,18]
+sum = 30
+res = []
+sol = []
+temp = 0
+def solve(arr, sum,temp, start, res, sol):
+    if temp == sum:
+        sol.append(res.copy())
+        return
+    elif temp>sum:
+        return
+    for i in range(start, len(arr)):
+        temp += arr[i]
+        res.append(arr[i])
+        solve(arr, sum, temp, i+1, res, sol)
+        res.pop()
+        temp -= arr[i]
+        
+solve(arr, sum, temp, 0, res, sol)
+print(sol)
