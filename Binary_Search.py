@@ -24,4 +24,20 @@ def binary_search(l,item,start,end):
 l=[3,12,13,14,15,16]
 item=31
 print(binary_search(l,item,0,len(l)-1))
+-------------------using loop-------------
+arr = [11, 12, 15, 18, 21]
+num = 18
+n = len(arr)-1
+i = 0
+while i <= n:
+    mid = (i+n)//2
+    print(mid, arr[mid])
+    if arr[mid] == num:
+        print("foound")
+        break
+    if num < arr[mid]:
+        n = mid-1
+    if num > arr[mid]:
+        i = mid+1
+
 
